@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
+import { Routes, Route } from 'react-router-dom';
+
+import Nav from './components/Nav';
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div 
+      css={css`
+        box-sizing: border-box;
+        margin: 0;
+        min-width: 0;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+      `}
+    >
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
