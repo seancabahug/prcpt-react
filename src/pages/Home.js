@@ -11,7 +11,6 @@ export default function Home() {
   const [isHover, setIsHover] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const hoverTransitionRatio = useMotionValue(0);
 
   const resetMousePosition = () => {
     mouseX.set(0);
@@ -21,7 +20,7 @@ export default function Home() {
   return <>
     <Wrapper style={{ height: "100vh", alignItems: "center" }}>
       <MotionConfig transition={transition}>
-        <Opening3DScene isHover={isHover} mouseX={mouseX} mouseY={mouseY} hoverTransitionRatio={hoverTransitionRatio} />
+        <Opening3DScene isHover={isHover} mouseX={mouseX} mouseY={mouseY} />
         <Container>
           <Row>
             <Col>
@@ -30,8 +29,8 @@ export default function Home() {
                   <motion.div
                     ref={ref}
                     variants={{
-                      rest: { scale: 1, hoverTransitionRatio: 0 },
-                      hover: { scale: 1.15, hoverTransitionRatio: 1 }
+                      rest: { scale: 1 },
+                      hover: { scale: 1.15 }
                     }}
                     animate={isHover ? "hover" : "rest"}
                     onHoverStart={() => {

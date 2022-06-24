@@ -8,8 +8,6 @@ import { useRef, useLayoutEffect } from 'react';
 import { transition } from '../config';
 
 import { Canvas, useThree } from '@react-three/fiber';
-import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
-import { BlendFunction } from 'postprocessing';
 
 // THANK YOU FRAMER MOTION 3D EXAMPLES
 
