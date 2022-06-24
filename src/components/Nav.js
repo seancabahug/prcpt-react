@@ -374,6 +374,7 @@ const NavLink = props => <div css={css`
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      transition: color 0.25s;
 
       :hover {
           color: #95d0c3;
@@ -462,7 +463,7 @@ export default function Nav() {
       paddingBottom: "40px", 
       position: "absolute",
       zIndex: 1,
-      backgroundColor: "transparent"
+      background: "transparent"
     }}>
       <Container>
         <Row>
