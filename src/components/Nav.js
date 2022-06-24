@@ -1,76 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
+
+import { useState } from "react";
 
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import logo from '../assets/images/prcpt_logo.png';
 
-const Wrapper = styled.div`
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  padding-top: 70px;
-  padding-bottom: 40px;
-  position: relative;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 100%;
-  background: linear-gradient(to right,#111111,#111111);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-`;
-
-const Container = styled.div`
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  position: relative;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: auto;
-  width: 1200px;
-  margin-right: 100px;
-  margin-left: 100px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-
-  @media screen and (max-width: 992px) { 
-    width: 750px;
-    margin-right: 40px;
-    margin-left: 40px;
-  }
-`;
-
-const Row = styled.div`
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  position: relative;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  width: auto;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  margin: 0 -15px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-`;
+import { Container, Wrapper, Row } from './Layout';
+import { MobileNavMenuText } from './Typography';
 
 const LeftContainer = styled.div`
   box-sizing: border-box;
@@ -217,7 +160,7 @@ const LogoDiv = () => <div css={css`
   </Link>
 </div>;
 
-const MobileHamburgerButton = () => <div css={css`
+const MobileHamburgerButton = props => <div css={css`
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -287,7 +230,9 @@ const MobileHamburgerButton = () => <div css={css`
       background: none;
       border-color: #fff;
     }
-  `}>
+  `}
+  onClick={props.onClick}
+  >
     <FontAwesomeIcon icon={faBars} />
   </button>
 </div>
@@ -439,24 +384,109 @@ const NavLink = props => <div css={css`
   </Link>
 </div>
 
+const MobileNavExitButton = props => <FontAwesomeIcon 
+  icon={faXmark}
+  onClick = {props.onClick}
+  css={css`
+    color: #ffffff;
+    opacity: 0.75;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    height: 42px;
+    transition: opacity 0.2s;
+  `}
+/>
+
+const MOBILE_NAV_TRANSITION_TIME = 0.25;
+const MobileNavOverlay = styled(
+  props => <motion.div
+    className={props.className}
+    variants={{
+      visible: { opacity: 0.9 },
+      disabled: { opacity: 0 }
+    }}
+    animate={props.visible ? "visible" : "disabled"}
+    transition={{ duration: MOBILE_NAV_TRANSITION_TIME }}
+  >
+    {props.children}
+  </motion.div>
+)`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: ${props => props.enabled ? "flex" : "none"};
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #111111;
+  z-index: 9999;
+`;
+
+const MobileNavSection = props => <div 
+  css={css`
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+  `}
+>
+  <Link to={props.to} style={{textDecoration: "none"}}>
+    <MobileNavMenuText>{props.text}</MobileNavMenuText>
+  </Link>
+</div>;
+
 export default function Nav() {
-  return <Wrapper>
-    <Container>
-      <Row>
-        <LeftContainer>
-          <LeftInsideContainer>
-            <LogoDiv />
-            <MobileHamburgerButton />
-          </LeftInsideContainer>
-        </LeftContainer>     
-        <RightContainer>
-          <RightInsideContainer>
-            <NavLink to="/products" text="BROWSE" />
-            <NavLink to="/whyus" text="WHY US?" />
-            <NavLink to="/contact" text="CONTACT US" />
-          </RightInsideContainer>
-        </RightContainer>
-      </Row>
-    </Container>
-  </Wrapper>
+  const [mobileNavOverlayEnabled, setMobileNavOverlayEnabled] = useState(false);
+  const [mobileNavOverlayVisible, setMobileNavOverlayVisible] = useState(false);
+
+  const closeNavOverlay = () => {
+    setMobileNavOverlayVisible(false);
+    setTimeout(() => setMobileNavOverlayEnabled(false), MOBILE_NAV_TRANSITION_TIME * 1000);
+  }
+
+  return <>
+    <MobileNavOverlay 
+      visible={mobileNavOverlayVisible} 
+      enabled={mobileNavOverlayEnabled}
+    >
+      <MobileNavExitButton 
+        onClick={closeNavOverlay}
+      />
+      <MobileNavSection to="/products" text="BROWSE" />
+      <MobileNavSection to="/whyus" text="WHY US?" />
+      <MobileNavSection to="/contact" text="CONTACT US" />
+    </MobileNavOverlay>
+    <Wrapper style={{
+      paddingTop: "70px", 
+      paddingBottom: "40px", 
+      position: "absolute",
+      zIndex: 1,
+      backgroundColor: "transparent"
+    }}>
+      <Container>
+        <Row>
+          <LeftContainer>
+            <LeftInsideContainer>
+              <LogoDiv />
+              <MobileHamburgerButton 
+                onClick={() => {
+                  setMobileNavOverlayEnabled(true);
+                  setMobileNavOverlayVisible(true);
+                  console.log("click")
+                }}
+              />
+            </LeftInsideContainer>
+          </LeftContainer>     
+          <RightContainer>
+            <RightInsideContainer>
+              <NavLink to="/products" text="BROWSE" />
+              <NavLink to="/whyus" text="WHY US?" />
+              <NavLink to="/contact" text="CONTACT US" />
+            </RightInsideContainer>
+          </RightContainer>
+        </Row>
+      </Container>
+    </Wrapper>
+  </>
 }
