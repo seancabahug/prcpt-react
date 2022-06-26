@@ -30,8 +30,6 @@ import GlassesImage2 from "../assets/images/glasses_2.jpg";
 import GlassesImage3 from "../assets/images/glasses_3.jpg";
 import GlassesImage4 from "../assets/images/glasses_4.jpg";
 
-const orientationSensorInputSensitivity = 0.5;
-
 export default function Home() {
   const [ref, bounds] = useMeasure({ scroll: false });
   const [isHover, setIsHover] = useState(false);
@@ -71,6 +69,22 @@ export default function Home() {
       if (sensor) sensor.stop();
     };*/
   }, []);
+
+  const appearOnScreenVariants = {
+    offscreen: {
+      y: -100,
+      opacity: 0,
+    },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.8,
+      },
+    },
+  };
 
   return (
     <>
@@ -159,8 +173,15 @@ export default function Home() {
               extraStyle="margin-right: 16.667%; width: 33.33%;"
               mobileStyle="width: 100%; margin-right: 0%;"
             >
-              <Header2>PRCPTion I</Header2>
-              <Header5 style={{ marginBottom: "160px" }}>V1 Leopard</Header5>
+              <motion.div
+                variants={appearOnScreenVariants}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.8 }}
+              >
+                <Header2>PRCPTion I</Header2>
+                <Header5 style={{ marginBottom: "160px" }}>V1 Leopard</Header5>
+              </motion.div>
               <RoundedImage
                 height={"197px"}
                 src={GlassesImage1}
@@ -199,12 +220,19 @@ export default function Home() {
               </div>
             </Col>
             <Col extraStyle="width: 50%;" mobileStyle="width: 100%;">
-              <Header4
-                extraStyle="margin-top: 123px; margin-bottom: 120px;"
-                mobileStyle="margin-top: 80px;"
+              <motion.div
+                variants={appearOnScreenVariants}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.8 }}
               >
-                The pinnacle of spectacle engineering. See for yourself.
-              </Header4>
+                <Header4
+                  extraStyle="margin-top: 123px; margin-bottom: 120px;"
+                  mobileStyle="margin-top: 80px;"
+                >
+                  The pinnacle of spectacle engineering. See for yourself.
+                </Header4>
+              </motion.div>
               <RoundedImage
                 alt="Glasses"
                 src={GlassesImage2}
