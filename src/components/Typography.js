@@ -1,4 +1,6 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
+
+import { accentColor } from "../config";
 
 export const OpeningHeader = styled.h1`
   box-sizing: border-box;
@@ -39,4 +41,56 @@ export const MobileNavMenuText = styled.h1`
   text-shadow: 0px 5px 10px #00000044;
   text-align: center;
   line-height: 120%;
+`;
+
+export const Header2 = styled.h2`
+  font-family: Epilogue, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 300;
+  font-size: 64px;
+  line-height: 120%;
+  letter-spacing: -1.5px;
+  margin-bottom: 0;
+  color: #fff;
+`;
+
+export const Header5 = styled.h5`
+  font-family: Epilogue, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -1.5px;
+  margin-bottom: 0;
+  color: ${accentColor};
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 90px;
+  }
+`;
+
+export const Text = styled.p`
+  font-family: Epilogue, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  letter-spacing: 0px;
+  margin-bottom: 0;
+  color: rgb(173, 181, 189);
+`;
+
+export const Header4 = styled.h4`
+  font-family: Epilogue, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 120%;
+  letter-spacing: -1.5px;
+  color: #fff;
+  ${(props) => (props.extraStyle ? props.extraStyle : "")}
+
+  ${(props) =>
+    props.mobileStyle
+      ? `
+    @media screen and (max-width: 992px) {
+      ${props.mobileStyle}
+    }
+  `
+      : ""}
 `;
