@@ -118,6 +118,7 @@ export function Opening3DScene({ isHover, mouseX, mouseY }) {
         align-items: center;
         background-color: #111111;
         background-image: url(${OpeningBackground});
+        background-attachment: fixed;
         background-position: bottom;
       `}
     >
