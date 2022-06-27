@@ -24,6 +24,24 @@ export const OpeningHeader = styled.h1`
   }
 `;
 
+export const Header1 = styled.h1`
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  font-family: Epilogue;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 120%;
+  -webkit-letter-spacing: -1.5px;
+  -moz-letter-spacing: -1.5px;
+  -ms-letter-spacing: -1.5px;
+  letter-spacing: -1.5px;
+  text-transform: none;
+  color: #fff;
+  text-shadow: 0px 5px 10px #00000044;
+  text-align: left;
+`;
+
 export const MobileNavMenuText = styled.h1`
   box-sizing: border-box;
   margin: 0;

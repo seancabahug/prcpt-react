@@ -46,6 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     //var sensor;
+    document.title = "PRCPT";
     if (isMobile) {
       setIsHover(true);
       /*Promise.all([
@@ -70,6 +71,12 @@ export default function Home() {
     };*/
   }, []);
 
+  const appearTransitionSettings = {
+    type: "spring",
+    bounce: 0.4,
+    duration: 2,
+  };
+
   const appearOnScreenVariants = {
     offscreen: {
       y: -100,
@@ -78,11 +85,17 @@ export default function Home() {
     onscreen: {
       y: 0,
       opacity: 1,
-      transition: {
-        type: "spring",
-        bounce: 0.4,
-        duration: 0.8,
-      },
+      transition: appearTransitionSettings,
+    },
+  };
+
+  const fadeOnScreenVariants = {
+    offscreen: {
+      opacity: 0,
+    },
+    onscreen: {
+      opacity: 1,
+      transition: appearTransitionSettings,
     },
   };
 
@@ -212,11 +225,18 @@ export default function Home() {
                   width: auto;
                 `}
               >
-                <Text>
-                  A product of extensive optometric research and decades of
-                  meticulous engineering, the PRCPTion I V1 Leopard brings
-                  diamonds among dirt to our table of competitors.
-                </Text>
+                <motion.div
+                  variants={fadeOnScreenVariants}
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.8 }}
+                >
+                  <Text>
+                    A product of extensive optometric research and decades of
+                    meticulous engineering, the PRCPTion I V1 Leopard brings
+                    diamonds among dirt to our table of competitors.
+                  </Text>
+                </motion.div>
               </div>
             </Col>
             <Col extraStyle="width: 50%;" mobileStyle="width: 100%;">
@@ -263,11 +283,19 @@ export default function Home() {
                   width: auto;
                 `}
               >
-                <Text>
-                  The perfect balance between resplendent style and accessible
-                  function, capturing the essence of your beauty and the world's
-                  beauty. They say no frame is perfect; they are liars.
-                </Text>
+                <motion.div
+                  variants={fadeOnScreenVariants}
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.8 }}
+                >
+                  <Text>
+                    The perfect balance between resplendent style and accessible
+                    function, capturing the essence of your beauty and the
+                    world's beauty. They say no frame is perfect; they are
+                    liars.
+                  </Text>
+                </motion.div>
               </div>
             </Col>
           </Row>
@@ -302,12 +330,21 @@ export default function Home() {
                   }
                 `}
               >
-                <Text style={{ marginBottom: "10px" }}>
-                  Monthly workshops, constant manager meetings and feedback
-                  polls ensure the store environment is friendly and welcoming
-                  for both customer and worker.
-                </Text>
-                <Text>Also, you got one year to step on your glasses. Go.</Text>
+                <motion.div
+                  variants={fadeOnScreenVariants}
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.8 }}
+                >
+                  <Text style={{ marginBottom: "10px" }}>
+                    Monthly workshops, constant manager meetings and feedback
+                    polls ensure the store environment is friendly and welcoming
+                    for both customer and worker.
+                  </Text>
+                  <Text>
+                    Also, you got one year to step on your glasses. Go.
+                  </Text>
+                </motion.div>
               </div>
             </Col>
             <Col
@@ -336,13 +373,20 @@ export default function Home() {
                   }
                 `}
               >
-                <Text>
-                  Don’t let life take your sight away, on demand support at our
-                  various locations can fit you with temporary glasses while we
-                  polish up your damaged ones. We see further than others, if
-                  you can’t reach one our locations we’ll ship you a temporary
-                  pair on-the-day and we’ll discount a new pair.
-                </Text>
+                <motion.div
+                  variants={fadeOnScreenVariants}
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.8 }}
+                >
+                  <Text>
+                    Don’t let life take your sight away, on demand support at
+                    our various locations can fit you with temporary glasses
+                    while we polish up your damaged ones. We see further than
+                    others, if you can’t reach one our locations we’ll ship you
+                    a temporary pair on-the-day and we’ll discount a new pair.
+                  </Text>
+                </motion.div>
               </div>
             </Col>
           </Row>

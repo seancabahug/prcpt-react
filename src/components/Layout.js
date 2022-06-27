@@ -51,6 +51,16 @@ export const Container = styled.div`
     margin-right: 40px;
     margin-left: 40px;
   }
+  ${(props) => props.extraStyle}
+
+  ${(props) =>
+    props.mobileStyle
+      ? `
+    @media screen and (max-width: 992px) {
+      ${props.mobileStyle}
+    }
+  `
+      : ""}
 `;
 
 export const Row = styled.div`
@@ -71,6 +81,16 @@ export const Row = styled.div`
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  ${(props) => props.extraStyle}
+
+  ${(props) =>
+    props.mobileStyle
+      ? `
+    @media screen and (max-width: 992px) {
+      ${props.mobileStyle}
+    }
+  `
+      : ""}
 `;
 
 export const Col = styled.div`
@@ -214,6 +234,15 @@ export function RoundedImage(props) {
         justify-content: center;
         border-radius: 999px;
         box-shadow: 0px 5px 10px 0px #00000044;
+        ${props.extraStyle ? props.extraStyle : ""}
+
+        ${props.mobileStyle
+          ? `
+    @media screen and (max-width: 992px) {
+      ${props.mobileStyle}
+    }
+  `
+          : ""}
       `}
     >
       <img
