@@ -52,6 +52,10 @@ export default function Footer() {
                 align-items: center;
                 margin-top: 30px;
                 margin-bottom: 30px;
+
+                > * {
+                  text-decoration: none;
+                }
               `}
             >
               {[
@@ -63,13 +67,13 @@ export default function Footer() {
                   key={i}
                   to={x[1]}
                   css={css`
-                    text-decoration: none;
-                    margin-right: ${i === a.length - 1 ? "0px" : "30px"};
+                    margin-right: 30px;
                   `}
                 >
                   <Text>{x[0]}</Text>
                 </Link>
               ))}
+              <a href="https://github.com/seancabahug/prcpt-react"><Text>Source Code</Text></a>
             </div>
           </Col>
           <Col

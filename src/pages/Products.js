@@ -16,6 +16,7 @@ import PRCPTiveIIImage from "../assets/images/prcptive-ii.jpg";
 import { accentColor } from "../config";
 import ButtonLink from "../components/ButtonLink";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 function Product(props) {
   return (
@@ -64,6 +65,11 @@ function Product(props) {
 }
 
 export default function Products() {
+
+  useEffect(() => {
+    document.title = "Products | PRCPT";
+  }, []);
+
   return (
     <>
       <Wrapper extraStyle="height: 80vh;">

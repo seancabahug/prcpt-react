@@ -26,3 +26,6 @@ npm i
 ```
 npm start
 ```
+
+# To-do
+- ProductPage mobile compatibility
