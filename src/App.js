@@ -14,6 +14,9 @@ import PRCPTionIImage from "./assets/images/glasses_2.jpg";
 import PRCPTiveIImage from "./assets/images/prcptive-i.jpg";
 import PRCPTiveIIImage from "./assets/images/prcptive-ii.jpg";
 import PurchaseComplete from "./pages/PurchaseComplete";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Cookies from "./pages/Cookies";
+import WhyUs from "./pages/WhyUs";
 
 function App() {
   return (
@@ -75,6 +78,9 @@ function App() {
             />
           }
         />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/cookies" element={<Cookies />} />
+        <Route path="/whyus" element={<WhyUs />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

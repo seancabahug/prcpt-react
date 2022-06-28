@@ -18,6 +18,12 @@ import ButtonLink from "../components/ButtonLink";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 
+const appearTransitionSettings = {
+  type: "spring",
+  bounce: 0.4,
+  duration: 2,
+};
+
 function Product(props) {
   return (
     <Container extraStyle="width: 1200px; margin-bottom: 150px; justify-content: space-between;">
@@ -31,15 +37,32 @@ function Product(props) {
           }
         `}
       >
-        <Header2>{props.name}</Header2>
-        <Header5
-          css={css`
-            color: ${accentColor};
-            margin-bottom: 53px;
-          `}
+        <motion.div
+          variants={{
+            offscreen: {
+              y: -100,
+              opacity: 0,
+            },
+            onscreen: {
+              y: 0,
+              opacity: 1,
+              transition: appearTransitionSettings,
+            },
+          }}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.8 }}
         >
-          {props.model} - {props.price}
-        </Header5>
+          <Header2>{props.name}</Header2>
+          <Header5
+            css={css`
+              color: ${accentColor};
+              margin-bottom: 53px;
+            `}
+          >
+            {props.model} - {props.price}
+          </Header5>
+        </motion.div>
         <Text
           css={css`
             font-size: 20px;
@@ -65,7 +88,6 @@ function Product(props) {
 }
 
 export default function Products() {
-
   useEffect(() => {
     document.title = "Products | PRCPT";
   }, []);
@@ -87,22 +109,30 @@ export default function Products() {
                       y: 0,
                       transition: {
                         delay: 2,
-                        staggerChildren: 0.1
-                      }
-                    }
+                        staggerChildren: 0.1,
+                      },
+                    },
                   }}
                 >
-                  {"This is it. 2 minutes, and you'll see the world like never before.".split(" ").map((c, i) => {
-                    return (
-                      <motion.span key={c + "-" + i} variants={{
-                        hidden: { opacity: 0, y: 50 },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                        }
-                      }} transition={{duration: 0.5}}>{c+" "}</motion.span>
-                    )
-                  })}
+                  {"This is it. 2 minutes, and you'll see the world like never before."
+                    .split(" ")
+                    .map((c, i) => {
+                      return (
+                        <motion.span
+                          key={c + "-" + i}
+                          variants={{
+                            hidden: { opacity: 0, y: 50 },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                            },
+                          }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          {c + " "}
+                        </motion.span>
+                      );
+                    })}
                 </motion.span>
               </Header1>
             </Col>
