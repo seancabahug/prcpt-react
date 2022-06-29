@@ -17,6 +17,8 @@ import PurchaseComplete from "./pages/PurchaseComplete";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Cookies from "./pages/Cookies";
 import WhyUs from "./pages/WhyUs";
+import Contact from "./pages/Contact";
+import ContactFormSubmitted from "./pages/ContactFormSubmitted";
 
 function App() {
   return (
@@ -81,6 +83,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/whyus" element={<WhyUs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact/submitted" element={<ContactFormSubmitted />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

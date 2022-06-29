@@ -143,6 +143,7 @@ export function Opening3DScene({ isHover, mouseX, mouseY }) {
             shadows
             dpr={[1, 2]}
             resize={{ scroll: false, offsetSize: true }}
+            frameLoop="demand"
           >
             <Camera mouseX={mouseX} mouseY={mouseY} />
             <MotionConfig transition={transition}>

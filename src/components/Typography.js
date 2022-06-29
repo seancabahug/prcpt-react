@@ -92,6 +92,16 @@ export const Text = styled.p`
   letter-spacing: 0px;
   margin-bottom: 0;
   color: rgb(173, 181, 189);
+  ${(props) => (props.extraStyle ? props.extraStyle : "")}
+
+  ${(props) =>
+    props.mobileStyle
+      ? `
+    @media screen and (max-width: 992px) {
+      ${props.mobileStyle}
+    }
+  `
+      : ""}
 `;
 
 export const Header4 = styled.h4`

@@ -24,7 +24,7 @@ export default function ProductPage({ name, model, price, description, productIm
   }, [name]);
 
   return (
-    <Wrapper extraStyle="width: 100vw; height: 100vh; align-items: center;">
+    <Wrapper extraStyle="width: 100vw; height: 100vh; align-items: center; justify-content: center; padding-top: 150px;">
       <Container extraStyle="width: 1200px; justify-content: space-between;">
         <div
           css={css`

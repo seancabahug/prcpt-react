@@ -7,7 +7,8 @@ import { Text } from "./Typography";
 export default function ButtonLink(props) {
   return (
     <Link
-      to={props.to}
+      onClick={props.onClick}
+      to={{pathname: props.to, search: props.search}}
       css={css`
         box-sizing: border-box;
         margin: 0;
@@ -28,7 +29,8 @@ export default function ButtonLink(props) {
         padding: 10px 25px;
         text-decoration: none;
         flex-grow: 1;
-        width: 211px;
+        width: auto;
+        text-align: center;
         justify-content: center;
         transition: border-color 0.25s;
         transition: background-color 0.25s;
