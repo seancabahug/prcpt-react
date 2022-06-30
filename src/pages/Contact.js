@@ -71,7 +71,7 @@ export default function Contact() {
     <Wrapper extraStyle="width: 100vw; height: 100vh; justify-content: space-evenly; align-items: center;">
       <Container extraStyle="justify-content: space-between;">
         <Col
-          extraStyle="display: flex; flex-direction: column; justify-content: center; width: 38vw;"
+          extraStyle="display: flex; flex-direction: column; justify-content: center; width: 30vw;"
           mobileStyle="width: 100%;"
         >
           <Header1 style={{ paddingBottom: "10px" }}>
@@ -80,7 +80,7 @@ export default function Contact() {
           <Header5>We look forward to envisioning with you.</Header5>
         </Col>
         <Col
-          extraStyle="width: 40vw; > * { margin-bottom: 20px; }"
+          extraStyle="width: 30vw; > * { margin-bottom: 20px; }"
           mobileStyle="width: 100%;"
         >
           <input css={TextBoxStyling} onChange={e => setName(e.target.value)} placeholder="Name" type="text" />

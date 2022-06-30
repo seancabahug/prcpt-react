@@ -10,7 +10,13 @@ import {
   RoundedImage,
   LessRoundedImage,
 } from "../components/Layout";
-import { motion, useMotionValue, MotionConfig } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  MotionConfig,
+  useViewportScroll,
+  useTransform,
+} from "framer-motion";
 import useMeasure from "react-use-measure";
 import {
   Header2,
@@ -20,10 +26,11 @@ import {
   Text,
 } from "../components/Typography";
 import { Opening3DScene } from "../components/3d/Opening3DScene";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { accentColor, transition } from "../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { Parallax } from "react-scroll-parallax";
 
 import GlassesImage1 from "../assets/images/glasses_1.jpg";
 import GlassesImage2 from "../assets/images/glasses_2.jpg";
@@ -35,6 +42,7 @@ export default function Home() {
   const [isHover, setIsHover] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+
   const [isMobile, setIsMobile] = useState(
     window.matchMedia("(max-width: 992px)").matches
   );
@@ -195,11 +203,14 @@ export default function Home() {
                 <Header2>PRCPTion I</Header2>
                 <Header5 style={{ marginBottom: "160px" }}>V1 Leopard</Header5>
               </motion.div>
-              <RoundedImage
-                height={"197px"}
-                src={GlassesImage1}
-                alt="Glasses"
-              />
+              <Parallax speed={-3}>
+                <RoundedImage
+                  height={"197px"}
+                  extraStyle="margin-bottom: 100px;"
+                  src={GlassesImage1}
+                  alt="Glasses"
+                />
+              </Parallax>
               <div
                 css={css`
                   box-sizing: border-box;
@@ -253,11 +264,14 @@ export default function Home() {
                   The pinnacle of spectacle engineering. See for yourself.
                 </Header4>
               </motion.div>
-              <RoundedImage
-                alt="Glasses"
-                src={GlassesImage2}
-                height={"400px"}
-              />
+              <Parallax speed={-5}>
+                <RoundedImage
+                  alt="Glasses"
+                  src={GlassesImage2}
+                  height={"400px"}
+                  extraStyle="margin-bottom: 100px;"
+                />
+              </Parallax>
               <div
                 css={css`
                   box-sizing: border-box;

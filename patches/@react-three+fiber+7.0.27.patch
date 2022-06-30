@@ -1,0 +1,171 @@
+diff --git a/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js b/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js
+index 83bdf06..d05bf91 100644
+--- a/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js
++++ b/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js
+@@ -1,5 +1,5 @@
+ import * as THREE from 'three';
+-import * as React from 'react';
++import * as React3d from 'react';
+ import create from 'zustand';
+ import Reconciler from 'react-reconciler';
+ import { unstable_now, unstable_runWithPriority, unstable_IdlePriority } from 'scheduler';
+@@ -1067,7 +1067,7 @@ const isOrthographicCamera = def => def && def.isOrthographicCamera;
+ function calculateDpr(dpr) {
+   return Array.isArray(dpr) ? Math.min(Math.max(dpr[0], window.devicePixelRatio), dpr[1]) : dpr;
+ }
+-const context = /*#__PURE__*/React.createContext(null);
++const context = /*#__PURE__*/React3d.createContext(null);
+ 
+ const createStore = (applyProps, invalidate, advance, props) => {
+   const {
+@@ -1247,7 +1247,7 @@ const createStore = (applyProps, invalidate, advance, props) => {
+         priority: 0,
+         frames: 0,
+         lastProps: props,
+-        lastEvent: /*#__PURE__*/React.createRef(),
++        lastEvent: /*#__PURE__*/React3d.createRef(),
+         interaction: [],
+         hovered: new Map(),
+         subscribers: [],
+@@ -1490,7 +1490,7 @@ function createPointerEvents(store) {
+ // React currently throws a warning when using useLayoutEffect on the server.
+ // To get around it, we can conditionally useEffect on the server (no-op) and
+ // useLayoutEffect in the browser.
+-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
++const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? React3d.useLayoutEffect : React3d.useEffect;
+ 
+ function Block({
+   set
+@@ -1502,7 +1502,7 @@ function Block({
+   return null;
+ }
+ 
+-class ErrorBoundary extends React.Component {
++class ErrorBoundary extends React3d.Component {
+   constructor(...args) {
+     super(...args);
+     this.state = {
+@@ -1524,7 +1524,7 @@ ErrorBoundary.getDerivedStateFromError = () => ({
+   error: true
+ });
+ 
+-const Canvas = /*#__PURE__*/React.forwardRef(function Canvas({
++const Canvas = /*#__PURE__*/React3d.forwardRef(function Canvas({
+   children,
+   fallback,
+   tabIndex,
+@@ -1547,9 +1547,9 @@ const Canvas = /*#__PURE__*/React.forwardRef(function Canvas({
+     },
+     ...resize
+   });
+-  const canvasRef = React.useRef(null);
+-  const [block, setBlock] = React.useState(false);
+-  const [error, setError] = React.useState(false); // Suspend this component if block is a promise (2nd run)
++  const canvasRef = React3d.useRef(null);
++  const [block, setBlock] = React3d.useState(false);
++  const [error, setError] = React3d.useState(false); // Suspend this component if block is a promise (2nd run)
+ 
+   if (block) throw block; // Throw exception outwards if anything within canvas throws
+ 
+@@ -1557,10 +1557,10 @@ const Canvas = /*#__PURE__*/React.forwardRef(function Canvas({
+ 
+   useIsomorphicLayoutEffect(() => {
+     if (width > 0 && height > 0) {
+-      render( /*#__PURE__*/React.createElement(ErrorBoundary, {
++      render( /*#__PURE__*/React3d.createElement(ErrorBoundary, {
+         set: setError
+-      }, /*#__PURE__*/React.createElement(React.Suspense, {
+-        fallback: /*#__PURE__*/React.createElement(Block, {
++      }, /*#__PURE__*/React3d.createElement(React3d.Suspense, {
++        fallback: /*#__PURE__*/React3d.createElement(Block, {
+           set: setBlock
+         })
+       }, children)), canvasRef.current, { ...props,
+@@ -1577,7 +1577,7 @@ const Canvas = /*#__PURE__*/React.forwardRef(function Canvas({
+     const container = canvasRef.current;
+     return () => unmountComponentAtNode(container);
+   }, []);
+-  return /*#__PURE__*/React.createElement("div", {
++  return /*#__PURE__*/React3d.createElement("div", {
+     ref: containerRef,
+     id: id,
+     className: className,
+@@ -1589,7 +1589,7 @@ const Canvas = /*#__PURE__*/React.forwardRef(function Canvas({
+       overflow: 'hidden',
+       ...style
+     }
+-  }, /*#__PURE__*/React.createElement("canvas", {
++  }, /*#__PURE__*/React3d.createElement("canvas", {
+     ref: mergeRefs([canvasRef, forwardedRef]),
+     style: {
+       display: 'block'
+@@ -1598,7 +1598,7 @@ const Canvas = /*#__PURE__*/React.forwardRef(function Canvas({
+ });
+ 
+ function useStore() {
+-  const store = React.useContext(context);
++  const store = React3d.useContext(context);
+   if (!store) throw `R3F hooks can only be used within the Canvas component!`;
+   return store;
+ }
+@@ -1608,10 +1608,10 @@ function useThree(selector = state => state, equalityFn) {
+ function useFrame(callback, renderPriority = 0) {
+   const subscribe = useStore().getState().internal.subscribe; // Update ref
+ 
+-  const ref = React.useRef(callback);
+-  React.useLayoutEffect(() => void (ref.current = callback), [callback]); // Subscribe on mount, unsubscribe on unmount
++  const ref = React3d.useRef(callback);
++  React3d.useLayoutEffect(() => void (ref.current = callback), [callback]); // Subscribe on mount, unsubscribe on unmount
+ 
+-  React.useLayoutEffect(() => subscribe(ref, renderPriority), [renderPriority, subscribe]);
++  React3d.useLayoutEffect(() => subscribe(ref, renderPriority), [renderPriority, subscribe]);
+   return null;
+ }
+ 
+@@ -1637,7 +1637,7 @@ function buildGraph(object) {
+ }
+ 
+ function useGraph(object) {
+-  return React.useMemo(() => buildGraph(object), [object]);
++  return React3d.useMemo(() => buildGraph(object), [object]);
+ }
+ 
+ function loadingFn(extensions, onProgress) {
+@@ -1654,8 +1654,8 @@ function loadingFn(extensions, onProgress) {
+ }
+ 
+ function useMemoizedFn(fn) {
+-  const fnRef = React.useRef(fn);
+-  React.useLayoutEffect(() => void (fnRef.current = fn), [fn]);
++  const fnRef = React3d.useRef(fn);
++  React3d.useLayoutEffect(() => void (fnRef.current = fn), [fn]);
+   return (...args) => fnRef.current == null ? void 0 : fnRef.current(...args);
+ }
+ function useLoader(Proto, input, extensions, onProgress) {
+@@ -1779,7 +1779,7 @@ function render(element, canvas, {
+   }
+ 
+   if (store && fiber) {
+-    reconciler.updateContainer( /*#__PURE__*/React.createElement(Provider, {
++    reconciler.updateContainer( /*#__PURE__*/React3d.createElement(Provider, {
+       store: store,
+       element: element,
+       onCreated: onCreated,
+@@ -1797,7 +1797,7 @@ function Provider({
+   onCreated,
+   target
+ }) {
+-  React.useEffect(() => {
++  React3d.useEffect(() => {
+     const state = store.getState(); // Flag the canvas active, rendering will now begin
+ 
+     state.set(state => ({
+@@ -1810,7 +1810,7 @@ function Provider({
+ 
+     if (onCreated) onCreated(state);
+   }, []);
+-  return /*#__PURE__*/React.createElement(context.Provider, {
++  return /*#__PURE__*/React3d.createElement(context.Provider, {
+     value: store
+   }, element);
+ }

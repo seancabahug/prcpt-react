@@ -1,0 +1,53 @@
+diff --git a/node_modules/@react-three/drei/core/OrbitControls.js b/node_modules/@react-three/drei/core/OrbitControls.js
+index af3aebe..df82c80 100644
+--- a/node_modules/@react-three/drei/core/OrbitControls.js
++++ b/node_modules/@react-three/drei/core/OrbitControls.js
+@@ -1,9 +1,9 @@
+ import _extends from '@babel/runtime/helpers/esm/extends';
+ import { useThree, useFrame } from '@react-three/fiber';
+-import * as React from 'react';
++import * as ReactOC from 'react';
+ import { OrbitControls as OrbitControls$1 } from 'three-stdlib';
+ 
+-const OrbitControls = /*#__PURE__*/React.forwardRef(({
++const OrbitControls = /*#__PURE__*/ReactOC.forwardRef(({
+   makeDefault,
+   camera,
+   regress,
+@@ -23,15 +23,15 @@ const OrbitControls = /*#__PURE__*/React.forwardRef(({
+   const performance = useThree(state => state.performance);
+   const explCamera = camera || defaultCamera;
+   const explDomElement = domElement || events.connected || gl.domElement;
+-  const controls = React.useMemo(() => new OrbitControls$1(explCamera), [explCamera]);
++  const controls = ReactOC.useMemo(() => new OrbitControls$1(explCamera), [explCamera]);
+   useFrame(() => {
+     if (controls.enabled) controls.update();
+   });
+-  React.useEffect(() => {
++  ReactOC.useEffect(() => {
+     controls.connect(explDomElement);
+     return () => void controls.dispose();
+   }, [explDomElement, regress, controls, invalidate]);
+-  React.useEffect(() => {
++  ReactOC.useEffect(() => {
+     const callback = e => {
+       invalidate();
+       if (regress) performance.regress();
+@@ -47,7 +47,7 @@ const OrbitControls = /*#__PURE__*/React.forwardRef(({
+       controls.removeEventListener('change', callback);
+     };
+   }, [onChange, onStart, onEnd]);
+-  React.useEffect(() => {
++  ReactOC.useEffect(() => {
+     if (makeDefault) {
+       // @ts-expect-error new in @react-three/fiber@7.0.5
+       const old = get().controls; // @ts-expect-error new in @react-three/fiber@7.0.5
+@@ -61,7 +61,7 @@ const OrbitControls = /*#__PURE__*/React.forwardRef(({
+       });
+     }
+   }, [makeDefault, controls]);
+-  return /*#__PURE__*/React.createElement("primitive", _extends({
++  return /*#__PURE__*/ReactOC.createElement("primitive", _extends({
+     ref: ref,
+     object: controls,
+     enableDamping: enableDamping

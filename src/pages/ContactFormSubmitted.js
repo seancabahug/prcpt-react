@@ -18,9 +18,9 @@ export default function ContactFormSubmitted() {
       <Container>
         <Row>
           <Col extraStyle="display: flex; flex-direction: column; justify-content: center;">
-            <Header1 style={{paddingBottom: "10px"}}>Thank you for your feedback{name ? ", " + name : ""}!</Header1>
+            <Header1 style={{paddingBottom: "10px"}}>Thank you for reaching out{name ? ", " + name : ""}!</Header1>
             <Header5 style={{color: "white"}}>
-              Your feedback is extremely important to us.
+              We'll get in touch soon.
             </Header5>
           </Col>
         </Row>

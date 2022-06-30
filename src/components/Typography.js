@@ -87,7 +87,7 @@ export const Header5 = styled.h5`
 export const Text = styled.p`
   font-family: Epilogue, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 160%;
   letter-spacing: 0px;
   margin-bottom: 0;
